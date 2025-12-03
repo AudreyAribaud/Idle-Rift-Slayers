@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
     <title>Idle Rift Slayers</title>
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="style.css">
@@ -20,7 +20,7 @@
                 <span class="title-sub">Slayers</span>
             </h1>
             <p class="game-tagline">Conquérez les royaumes parallèles</p>
-            
+
             <div class="home-buttons">
                 <button id="play-btn" class="btn-primary">
                     <span class="btn-icon">⚔️</span>
@@ -31,19 +31,19 @@
                     <span>Installer l'application</span>
                 </button>
             </div>
-            
+
             <div class="home-features">
                 <div class="feature">
                     <span class="feature-icon">🗡️</span>
-                    <span>3 Légions Uniques</span>
+                    <span>5 Classes Uniques</span>
                 </div>
                 <div class="feature">
                     <span class="feature-icon">🌍</span>
-                    <span>Royaumes Parallèles</span>
+                    <span>5 Royaumes Parallèles</span>
                 </div>
                 <div class="feature">
                     <span class="feature-icon">⚡</span>
-                    <span>Progression Hors Ligne</span>
+                    <span>Progression Offline</span>
                 </div>
             </div>
         </div>
@@ -51,36 +51,126 @@
 
     <!-- Jeu principal -->
     <div id="game" style="display: none;">
+        <!-- Header avec stats principales -->
         <header>
-            <div>Âmes : <span id="souls">0</span></div>
-            <div>Âmes/s : <span id="sps">0</span></div>
+            <div class="stat-group">
+                <div class="stat-main">
+                    <span class="stat-icon">💀</span>
+                    <span class="stat-label">Âmes</span>
+                    <span id="souls" class="stat-value">0</span>
+                </div>
+                <div class="stat-sub">
+                    <span id="sps" class="stat-value">0</span>/s
+                </div>
+            </div>
+            <div class="stat-group">
+                <div class="stat-main">
+                    <span class="stat-icon">⭐</span>
+                    <span class="stat-label">Prestige</span>
+                    <span id="prestige-points" class="stat-value">0</span>
+                </div>
+            </div>
+            <div class="stat-group">
+                <div class="stat-main">
+                    <span class="stat-icon">🏆</span>
+                    <span class="stat-label">Niveau</span>
+                    <span id="player-level" class="stat-value">1</span>
+                </div>
+            </div>
         </header>
 
-        <!-- Royaumes parallèles -->
-        <div id="realms">
-            <div class="realm active" data-id="0">
-                <div class="realm-name">Forêt Maudite</div>
-                <canvas width="300" height="180"></canvas>
-                <div class="slayer-btn active" data-legion="0">Berserker</div>
-            </div>
-            <div class="realm" data-id="1">
-                <div class="realm-name">Abysse Volcanique</div>
-                <canvas width="300" height="180"></canvas>
-                <div class="slayer-btn" data-legion="1">Sorcière</div>
-            </div>
-            <div class="realm" data-id="2">
-                <div class="realm-name">Cieux Éthérés</div>
-                <canvas width="300" height="180"></canvas>
-                <div class="slayer-btn" data-legion="2">Titan</div>
+        <!-- Navigation par onglets -->
+        <nav class="tab-nav">
+            <button class="tab-btn active" data-tab="realms">🌍 Royaumes</button>
+            <button class="tab-btn" data-tab="slayers">⚔️ Slayers</button>
+            <button class="tab-btn" data-tab="upgrades">⬆️ Améliorations</button>
+            <button class="tab-btn" data-tab="prestige">⭐ Prestige</button>
+        </nav>
+
+        <!-- Onglet Royaumes -->
+        <div id="tab-realms" class="tab-content active">
+            <div class="realms-grid">
+                <!-- Les royaumes seront générés dynamiquement -->
             </div>
         </div>
 
-        <!-- Switch rapide de légion -->
-        <div id="quick-switch">
-            <button data-legion="0">Berserker</button>
-            <button data-legion="1">Sorcière</button>
-            <button data-legion="2">Titan</button>
+        <!-- Onglet Slayers -->
+        <div id="tab-slayers" class="tab-content">
+            <div class="slayers-container">
+                <h2>Vos Légions</h2>
+                <div class="slayers-grid">
+                    <!-- Les slayers seront générés dynamiquement -->
+                </div>
+                <div class="fusion-section">
+                    <h3>🔮 Fusion de Classes</h3>
+                    <p class="fusion-desc">Fusionnez 2 slayers max level pour créer une classe hybride !</p>
+                    <div id="fusion-slots">
+                        <div class="fusion-slot empty">Slot 1</div>
+                        <div class="fusion-plus">+</div>
+                        <div class="fusion-slot empty">Slot 2</div>
+                        <div class="fusion-arrow">→</div>
+                        <div class="fusion-result">?</div>
+                    </div>
+                    <button id="fusion-btn" class="btn-fusion" disabled>Fusionner</button>
+                </div>
+            </div>
         </div>
+
+        <!-- Onglet Améliorations -->
+        <div id="tab-upgrades" class="tab-content">
+            <div class="upgrades-container">
+                <h2>Améliorations Globales</h2>
+                <div class="upgrades-grid">
+                    <!-- Les upgrades seront générés dynamiquement -->
+                </div>
+
+                <h2 style="margin-top: 30px;">🛠️ Artefacts</h2>
+                <div class="artifacts-grid">
+                    <!-- Les artefacts seront générés dynamiquement -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Onglet Prestige -->
+        <div id="tab-prestige" class="tab-content">
+            <div class="prestige-container">
+                <h2>⭐ Système de Prestige</h2>
+                <div class="prestige-info">
+                    <p>Réinitialisez votre progression pour obtenir des points de prestige permanents !</p>
+                    <div class="prestige-calc">
+                        <div class="prestige-stat">
+                            <span>Âmes actuelles:</span>
+                            <span id="prestige-current-souls">0</span>
+                        </div>
+                        <div class="prestige-stat">
+                            <span>Points de prestige obtenus:</span>
+                            <span id="prestige-gain" class="prestige-gain">0</span>
+                        </div>
+                        <div class="prestige-stat">
+                            <span>Multiplicateur total:</span>
+                            <span id="prestige-multiplier">×1.0</span>
+                        </div>
+                    </div>
+                    <button id="prestige-btn" class="btn-prestige">🌟 Prestige (Reset)</button>
+                </div>
+
+                <h3>Bonus de Prestige</h3>
+                <div class="prestige-upgrades">
+                    <!-- Les upgrades de prestige seront générés dynamiquement -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Switch rapide de slayer (toujours visible) -->
+        <div id="quick-switch">
+            <div class="quick-switch-label">Switch Rapide:</div>
+            <div class="quick-switch-buttons">
+                <!-- Les boutons seront générés dynamiquement -->
+            </div>
+        </div>
+
+        <!-- Notifications flottantes -->
+        <div id="notifications"></div>
     </div>
 
     <script src="game.js"></script>
