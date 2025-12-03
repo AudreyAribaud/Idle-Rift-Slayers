@@ -1,0 +1,77 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #0d001a;
+    color: #fffa;
+    font-family: Arial;
+    text-align: center;
+    padding: 10px;
+}
+
+header {
+    padding: 15px;
+    background: #1a0033;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    font-size: 1.3em;
+}
+
+#realms {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.realm {
+    background: #1a0033aa;
+    border-radius: 12px;
+    padding: 10px;
+}
+
+.realm-name {
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #ff9900;
+}
+
+canvas {
+    background: #0004;
+    border: 2px solid #333;
+    border-radius: 8px;
+    width: 100%;
+    image-rendering: pixelated;
+}
+
+.slayer-btn {
+    margin-top: 8px;
+    padding: 8px;
+    background: #ff9900;
+    color: #000;
+    border-radius: 8px;
+}
+
+.slayer-btn.active {
+    background: #00ff99;
+    font-weight: bold;
+}
+
+#quick-switch {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 15px;
+}
+
+#quick-switch button {
+    padding: 15px 20px;
+    font-size: 1.1em;
+    background: #ff9900;
+    border: none;
+    border-radius: 50px;
+}

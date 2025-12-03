@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>Idle Rift Slayers</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="style.css">
+    <meta name="theme-color" content="#1a0033">
+    <link rel="icon" href="icons/icon-192.png">
+</head>
+
+<body>
+    <div id="game">
+        <header>
+            <div>Âmes : <span id="souls">0</span></div>
+            <div>Âmes/s : <span id="sps">0</span></div>
+        </header>
+
+        <!-- Royaumes parallèles -->
+        <div id="realms">
+            <div class="realm active" data-id="0">
+                <div class="realm-name">Forêt Maudite</div>
+                <canvas width="300" height="180"></canvas>
+                <div class="slayer-btn active" data-legion="0">Berserker</div>
+            </div>
+            <div class="realm" data-id="1">
+                <div class="realm-name">Abysse Volcanique</div>
+                <canvas width="300" height="180"></canvas>
+                <div class="slayer-btn" data-legion="1">Sorcière</div>
+            </div>
+            <div class="realm" data-id="2">
+                <div class="realm-name">Cieux Éthérés</div>
+                <canvas width="300" height="180"></canvas>
+                <div class="slayer-btn" data-legion="2">Titan</div>
+            </div>
+        </div>
+
+        <!-- Switch rapide de légion -->
+        <div id="quick-switch">
+            <button data-legion="0">Berserker</button>
+            <button data-legion="1">Sorcière</button>
+            <button data-legion="2">Titan</button>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+
+</html>

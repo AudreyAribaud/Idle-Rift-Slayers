@@ -1,0 +1,20 @@
+{
+    "name": "Idle Rift Slayers",
+    "short_name": "Rift Slayers",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#0d001a",
+    "theme_color": "#1a0033",
+    "icons": [
+        {
+            "src": "icons/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}
