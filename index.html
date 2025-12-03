@@ -12,7 +12,45 @@
 </head>
 
 <body>
-    <div id="game">
+    <!-- Écran d'accueil -->
+    <div id="home-screen">
+        <div class="home-container">
+            <h1 class="game-title">
+                <span class="title-main">Idle Rift</span>
+                <span class="title-sub">Slayers</span>
+            </h1>
+            <p class="game-tagline">Conquérez les royaumes parallèles</p>
+            
+            <div class="home-buttons">
+                <button id="play-btn" class="btn-primary">
+                    <span class="btn-icon">⚔️</span>
+                    <span>Jouer</span>
+                </button>
+                <button id="install-btn" class="btn-secondary">
+                    <span class="btn-icon">📱</span>
+                    <span>Installer l'application</span>
+                </button>
+            </div>
+            
+            <div class="home-features">
+                <div class="feature">
+                    <span class="feature-icon">🗡️</span>
+                    <span>3 Légions Uniques</span>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">🌍</span>
+                    <span>Royaumes Parallèles</span>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">⚡</span>
+                    <span>Progression Hors Ligne</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Jeu principal -->
+    <div id="game" style="display: none;">
         <header>
             <div>Âmes : <span id="souls">0</span></div>
             <div>Âmes/s : <span id="sps">0</span></div>

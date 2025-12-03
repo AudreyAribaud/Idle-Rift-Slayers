@@ -25,6 +25,64 @@ const realms = [
 
 let activeRealmId = 0;
 
+// === GESTION ÉCRAN D'ACCUEIL ===
+let deferredPrompt = null;
+const homeScreen = document.getElementById('home-screen');
+const gameScreen = document.getElementById('game');
+const playBtn = document.getElementById('play-btn');
+const installBtn = document.getElementById('install-btn');
+
+// Capturer l'événement d'installation PWA
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    installBtn.classList.remove('hidden');
+    console.log('💾 Installation PWA disponible');
+});
+
+// Bouton Jouer
+playBtn.addEventListener('click', () => {
+    homeScreen.style.display = 'none';
+    gameScreen.style.display = 'block';
+    // Initialiser le jeu si pas déjà fait
+    if (!gameInitialized) {
+        init();
+    }
+});
+
+// Bouton Installer
+installBtn.addEventListener('click', async () => {
+    if (!deferredPrompt) {
+        alert('L\'application est déjà installée ou l\'installation n\'est pas disponible sur cet appareil.');
+        return;
+    }
+
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+
+    if (outcome === 'accepted') {
+        console.log('✅ Application installée !');
+        installBtn.classList.add('hidden');
+    } else {
+        console.log('❌ Installation annulée');
+    }
+
+    deferredPrompt = null;
+});
+
+// Vérifier si l'app est déjà installée
+window.addEventListener('appinstalled', () => {
+    console.log('✅ Application installée avec succès !');
+    installBtn.classList.add('hidden');
+    deferredPrompt = null;
+});
+
+// Cacher le bouton d'installation si déjà en mode standalone
+if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
+    installBtn.classList.add('hidden');
+}
+
+
 // === FONCTIONS DE SAUVEGARDE ===
 function saveGame() {
     const saveData = {
@@ -115,7 +173,12 @@ function updateButtons(activeId) {
 }
 
 // === INITIALISATION ===
+let gameInitialized = false;
+
 function init() {
+    if (gameInitialized) return;
+    gameInitialized = true;
+
     // Initialisation des canvas
     document.querySelectorAll('.realm').forEach((r, i) => {
         realms[i].canvas = r.querySelector('canvas');
@@ -179,9 +242,5 @@ if ('serviceWorker' in navigator) {
 }
 
 // === DÉMARRAGE ===
-// Attendre que le DOM soit prêt
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-} else {
-    init();
-}
+// Le jeu s'initialise uniquement quand l'utilisateur clique sur "Jouer"
+// Les événements de l'écran d'accueil sont déjà configurés ci-dessus
