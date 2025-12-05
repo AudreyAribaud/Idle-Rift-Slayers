@@ -42,18 +42,33 @@ Chaque royaume fonctionne **simultanément** avec son propre multiplicateur :
 
 ## 🚀 Installation
 
-### Jouer en ligne
-1. Ouvrez `index.html` dans votre navigateur
-2. Ou lancez un serveur local :
+### Jouer en ligne (Recommandé)
+1. Lancez le serveur anti-cache :
+   ```bash
+   python3 server.py 8000
+   ```
+2. Visitez `http://localhost:8000`
+3. Profitez du jeu sans problème de cache ! 🎮
+
+### Alternative (serveur standard)
+1. Lancez un serveur HTTP simple :
    ```bash
    python3 -m http.server 8000
    ```
-3. Visitez `http://localhost:8000`
+2. Visitez `http://localhost:8000`
+3. ⚠️ Vous devrez peut-être vider le cache manuellement (`Ctrl+Shift+R`)
 
 ### Installer comme PWA
 1. Cliquez sur le bouton "Installer l'application" sur l'écran d'accueil
 2. Ou utilisez le menu de votre navigateur (Chrome: "Installer l'application")
 3. Profitez du mode offline complet !
+
+### 🚫 Éviter les Problèmes de Cache
+Consultez le fichier [CACHE-GUIDE.md](CACHE-GUIDE.md) pour :
+- Comprendre les solutions anti-cache implémentées
+- Procédures de déploiement
+- Dépannage des problèmes de cache
+
 
 ## 🎮 Comment Jouer
 
